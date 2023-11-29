@@ -1,24 +1,3 @@
-# Google Chrome Bookmarklets
-## What is a bookmarklet?
-
-A bookmarklet is a small piece of JavaScript code that can be saved as a bookmark in your web browser. When clicked, a bookmarklet performs a specific action or function on the current webpage, such as:
-
-- Modifying the appearance of a web page
-- Extracting data from a web page
-- Sharing a web page to a social media platform
-- Running a search query on the selected text
-
-Bookmarklets are a powerful tool for customizing your web browsing experience and automating tasks.
-
-## How to create a bookmarklet?
-
-To create a bookmarklet, you need to write a small piece of JavaScript code. You can find many examples of bookmarklets here, or you can write your own.
-
-Once you have written your bookmarklet code, you need to save it as a bookmark in your web browser. Then, in the URL field, paste the bookmarklet code. You can also give the bookmark a name and choose a folder to save it in.
-
-Here are a few examples illustrating how bookmarklets can be utilized for auditing purposes. Feel free to modify or develop them.
-
-
 ### 1. Opens Google Search Console performance report and filters the current page using **"URLs containing"** filter
 
  > Access to the **"URL Prefix"** property within the Google Search Console account associated with the current domain is required.
