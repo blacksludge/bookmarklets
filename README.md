@@ -1,4 +1,6 @@
-### 1. Opens Google Search Console performance report and filters the current page using **"URLs containing"** filter
+## GSC Stuff
+
+### Opens Google Search Console performance report and filters the current page using **"URLs containing"** filter (defaults to 3 months)
 
  > Access to the **"URL Prefix"** property within the Google Search Console account associated with the current domain is required.
 
@@ -9,7 +11,7 @@ javascript: (function() {
 ```
 ***
 
-### 2. Opens Google Search Console performance report and filters the current page using **"Exact URL"** filter
+### Opens Google Search Console performance report and filters the current page using **"Exact URL"** filter (defaults to 3 months)
 > Access to the **"URL Prefix"** property within the Google Search Console account associated with the current domain is required.
 
 ```javascript
@@ -19,7 +21,14 @@ javascript: (function() {
 ```
 ***
 
-### 3. Sends the current URL to the Google Rich Result Testing tool
+### Opens Google Search Console performance report and filters the current page using **"Exact URL"** filter (yesterday/fresh results)
+
+```javascript
+javascript:void(window.open("https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2F%22+window.location.hostname+%22%2F&num_of_days=1&page=!%22+window.location.href));
+```
+***
+
+### Sends the current URL to the Google Rich Result Testing tool
 
 ```javascript
 javascript: (function() {
@@ -28,7 +37,7 @@ javascript: (function() {
 ```
 ***
 
-### 4. Sends the current URL to the Google AMP Testing tool
+### Sends the current URL to the Google AMP Testing tool
 
 ```javascript
 javascript: (function() {
@@ -37,7 +46,92 @@ javascript: (function() {
 ```
 ***
 
-### 5. Sends the current URL to Google PageSpeed Insights
+## Yahoo-specific stuff
+
+### Get article information
+
+```javascript
+javascript:(function(w){var Y=w.open("http://ncp-gateway-staging.media.yahoo.com:4080/api/v2/gql/content_view?namespace=media&id=deeplink-simple&version=v1&url=%22+window.location.href);Y.focus()})(window);
+```
+***
+
+### Get list of all slugs associated with article
+Look under "yahoo-media:keys" and then "_keys". You'll see "ymedia-alias:shadow=" and then the slug, minus ".html"
+
+```javascript
+javascript:(function(){window.open("https://ncptools.media.yahoo.com:4443/carmot/v1/object/"+YAHOO.context.meta['uuid']+"?facets=yahoo-media:keys#%7B'search'%3A'yahoo-media%3Akeys%2F_keys'%7D%22,'_blank');})();
+```
+***
+
+### Edit in PNR
+For yahoo.com
+
+```javascript
+javascript:(function(){window.open("https://curate.publishing.oath.com/story/athena_test/"+YAHOO.context.meta['uuid'],'_blank');})();
+```
+***
+
+## General stuff
+
+### Open in the Schema.org validator
+
+```javascript
+javascript:(function(w){var Y=w.open("https://validator.schema.org/#url=%22+window.location.href);Y.focus()})(window);
+```
+***
+
+### Open the Google Cache version of the current page
+
+```javascript
+javascript:(function(w){var Y=w.open("https://webcache.googleusercontent.com/search?q=cache:%22+window.location.href);Y.focus()})(window);
+```
+***
+
+### Open the current page in SEMRush
+
+```javascript
+javascript:(function(w){var Y=w.open("https://www.semrush.com/analytics/organic/overview/?q=%22+window.location.href+%22&db=us&searchType=subfolder&device=mobile%22);Y.focus()})(window);
+```
+***
+
+### Open the current page in Ahrefs
+
+```javascript
+javascript:(function(w){var Y=w.open("https://app.ahrefs.com/site-explorer/overview/v2/prefix/recent?target=%22+window.location.href);Y.focus()})(window);
+```
+***
+
+### Open the current page's results in the Wayback Machine
+
+```javascript
+javascript:void(window.open(%27https://web.archive.org/web/*/%27+window.location.href,%27_blank%27));
+```
+***
+
+### Save the current page to the Wayback Machine
+
+```javascript
+javascript:void(window.open('https://web.archive.org/save/'+location.href));
+```
+***
+
+### Run a Google "site:" search for the current domain (including subdomain)
+
+```javascript
+javascript:location=%22http://www.google.com/search?num=100&q=site:%22%20+%20escape(location.hostname);%20void%200
+```
+***
+
+### Turn a page of Google results into a list of links
+
+```javascript
+javascript:( function(){ str="<link href='http://www.onlinesales.co.uk/seo/bookmarklet/seo.css' rel='stylesheet' type='text/css'>\n"; anchors=document.getElementsByTagName("a"); str+="<table>"; str+="<tr><th>#%3C/th%3E%3Cth%3EHREF%3C/th%3E%3Cth%3EAnchor%3C/th%3E%3C/tr%3E\n%22;%20var%20k=0;%20var%20listing=%22%22;%20var%20links=%22%22;%20for(i=0;i%3Canchors.length;i++){%20var%20anchorText%20=%20anchors[i].textContent;%20var%20anchorLink%20=%20anchors[i].href;%20if(anchorLink.match(/^((?!google|cache|youtube\.com\/results|javascript:{}|javascript:void\(0\)|api\.technorati\.com|botw\.org\/search|del\.icio\.us\/url\/check|digg\.com\/search|search\.twitter\.com\/search|search\.yahoo\.com\/search|siteanalytics\.compete\.com|tools\.seobook\.com\/general\/keyword\/suggestions|web\.archive\.org\/web\/|whois\.domaintools\.com|www\.alexa\.com\/data\/details\/main|www\.bloglines\.com\/search|www\.majesticseo\.com\/search\.php|www\.semrush\.com\/info\/|www\.semrush\.com\/search\.php|www\.stumbleupon\.com\/url|wikipedia.org\/wiki\/Special:Search).)*$/i)){%20listing+=anchorLink+%22\n%22;%20links+=%22%3Ca%20href=\%22%22+anchorLink+%22\%22%3E%22+anchorText+%22%3C/a%3E\n%22;%20k=k+1;%20if%20(anchorText%20===%20undefined)%20anchorText%20=%20anchors[i].innerText;%20str+=%22%3Ctr%3E%22;%20str+=%22%3Ctd%3E%22+k+%22%3C/td%3E%22;%20str+=%22%3Ctd%3E%3Ca%20href=%22+anchors[i].href+%22%3E%22+anchors[i].href+%22%3C/a%3E%3C/td%3E%22;%20str+=%22%3Ctd%3E%22+anchorText+%22%3C/td%3E%22;%20str+=%22%3C/tr%3E\n%22;%20}%20}%20str+=%22%3C/table%3E%3Cbr/%3E%C2%A0%3Cbr/%3E%3Ch2%3EPlain%20Listing%3C/h2%3E%3Ctextarea%20cols=80%20rows=10%3E%22;%20str+=listing;%20str+=%22%3C/textarea%3E%3Cbr/%3E%C2%A0%3Cbr/%3E%3Ch2%3EHTML%20Links%3C/h2%3E%3Ctextarea%20cols=80%20rows=10%3E%22;%20str+=links;%20str+=%22%3C/textarea%3E%3Cbr/%3E%C2%A0%3Cbr/%3E%3Cp%20align=center%3E%3Ca%20href='http://www.onlinesales.co.uk/'%3EBookmarklet%20by%20Liam%20Delahunty%20of%20Online%20Sales%3C/a%3E%3C/p%3E%22;%20with(window.open()){%20document.write(str);%20document.close();%20}%20})()
+```
+***
+
+## Some other guy's bookmarklets that might be useful
+
+### Sends the current URL to Google PageSpeed Insights
 
 ```javascript
 javascript: (function() {
@@ -46,7 +140,7 @@ javascript: (function() {
 ```
 ***
 
-### 6. Highlights all `<a>` tags on a page
+### Highlights all `<a>` tags on a page
 
 This bookmarklet visually highlights all anchor elements on a webpage by changing their background color to yellow, adding a blue border, and applying padding. It alerts the user before highlighting `<a>` tags and shows"Links highlighted on the page." if there is at least one `<a>` and shows "No anchor elements found on this page." if there is no `<a>` elements on the page.
 
@@ -67,7 +161,7 @@ javascript: (function() {
 ```
 ***
 
-### 7. Shows the number of `<a>` and highlight them with random colors
+### Shows the number of `<a>` and highlight them with random colors
 
 ```javascript
 javascript: (function() {
@@ -92,7 +186,7 @@ javascript: (function() {
 ```
 ***
 
-### 8. Shows alt attribute of images on them
+### Shows alt attribute of images on them
 
 ```javascript
 javascript: (function() {
@@ -115,7 +209,7 @@ javascript: (function() {
 ```
 ***
 
-### 9. Shows the `<h>` type at the right side of every heading
+### Shows the `<h>` type at the right side of every heading
 
 ```javascript
 javascript: (function() {
@@ -133,7 +227,7 @@ javascript: (function() {
 ```
 ***
 
-### 10. Shows the total number of elements and some other elements separately
+### Shows the total number of elements and some other elements separately
 
 When this bookmarklet is executed, it displays an alert with the total number of elements and some other elements like `<h1>` to `<h6>`, `CSS`, `JS`, `a`, `img`, `picture`, `video`, `br` and `canonical`.
 
@@ -168,7 +262,7 @@ javascript: (function() {
 ```
 ***
 
-### 11. Shows the `canonical` address and meta `robots` 
+### Shows the `canonical` address and meta `robots` 
 
 Displays an alert with the canonical URL and meta robots of the current page.
 
@@ -187,7 +281,7 @@ javascript:(function() {
 ```
 ***
 
-### 12. Shows the numnbers and URLs of `preconnect`, `preload`, `prefetch`, and `dns-prefetch` links
+### Shows the numnbers and URLs of `preconnect`, `preload`, `prefetch`, and `dns-prefetch` links
 
  Shows separate alerts for the numbers and URLs of preconnect, preload, prefetch, and dns-prefetch links on the current page.
 
@@ -213,7 +307,7 @@ javascript:(function() {
 ```
 ***
 
-### 13. Shows the meta description of the current page
+### Shows the meta description of the current page
 
 Displays an alert with the meta description of the current page.
 
@@ -231,7 +325,7 @@ javascript:(function() {
 ```
 ***
 
-### 14. Shows title tag, meta description and meta keywords, and their number of characters
+### Shows title tag, meta description and meta keywords, and their number of characters
 
 ```javascript
 javascript:(function() {
@@ -254,7 +348,7 @@ javascript:(function() {
 ```
 ***
 
-### 15. Display information about the cookies set by the current webpage
+### Display information about the cookies set by the current webpage
 
 Displays an alert containing details about the cookies set on the current webpage:
 
@@ -320,7 +414,7 @@ javascript:(function() {
 ```
 ***
 
-### 16. Display information about web fonts used on the current webpage
+### Display information about web fonts used on the current webpage
 
 ```javascript
 javascript:(function() {
@@ -341,7 +435,7 @@ javascript:(function() {
 ```
 ***
 
-### 17. Display the HTTP response header in a modal
+### Display the HTTP response header in a modal
 
 ```javascript
 javascript:(function() {
@@ -397,7 +491,7 @@ javascript:(function() {
 ```
 ***
 
-### 18. Display the number of `<br>` and highlight 20 characters before and after them
+### Display the number of `<br>` and highlight 20 characters before and after them
 
 ```javascript
 javascript:(function() {
@@ -448,7 +542,7 @@ javascript:(function() {
 ```
 ***
 
-### 19. List all scripts and their loading types in the browser console
+### List all scripts and their loading types in the browser console
 
 Scan all <scripts> in the DOM and create a table that displays whether they are loaded asynchronously, deferred, or have the type="module" attribute.
 
@@ -471,7 +565,7 @@ console.table(scriptsLoading);
 Source: [Webperf-Snippets](https://webperf-snippets.nucliweb.net/Loading/Script-Loading)
 
 ***
-### 20. List all resource hints
+### List all resource hints
 
 List all "preload", "prefetch", "preconnect", "dns-prefetch", "preconnect dns-prefetch", "prerender" and "modulepreload".
   
@@ -497,7 +591,7 @@ Source: [Webperf-Snippets](https://webperf-snippets.nucliweb.net/Loading/Resourc
 
 ***
 
-### 19. List all FONTS preloaded, loaded, and used above the fold of the page
+### List all FONTS preloaded, loaded, and used above the fold of the page
 
 ```javascript
 javascript:(function() {
@@ -558,7 +652,7 @@ Source: [Webperf-Snippets](https://webperf-snippets.nucliweb.net/Loading/Fonts-P
 
 ***
 
-### 20. Get your ‍`<head>‍` in order
+### Get your ‍`<head>‍` in order
 
 Ordering elements in the <head> can impact perceived page performance.
 This script is designed to assist you in identifying elements that are out of order.
