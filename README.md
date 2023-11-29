@@ -67,7 +67,7 @@ javascript:(function(){window.open("https://ncptools.media.yahoo.com:4443/carmot
 For yahoo.com
 
 ```javascript
-javascript:(function(){window.open("https://curate.publishing.oath.com/story/athena_test/"+YAHOO.context.meta['uuid'],'_blank');})();
+javascript:(function(){window.open("https://pnr.ouryahoo.com/story/athena_test/"+YAHOO.context.meta['uuid'],'_blank');})();
 ```
 ***
 
