@@ -63,6 +63,14 @@ javascript:(function(){window.open("https://ncptools.media.yahoo.com:4443/carmot
 ```
 ***
 
+### Get the CCM on an article
+There's a lot here but it's the motherload of content data.
+
+```javascript
+javascript:(function(){var currentUrl = window.location.href;if(currentUrl.indexOf("yahoo.com") !== -1){window.open("https://ncptools.media.yahoo.com:4443/v/carmot//"+YAHOO.context.meta['uuid'],'_blank');  } else if (currentUrl.indexOf("engadget.com")!==-1){var post=document.querySelector('meta[name="post_id"]').getAttribute('content');window.open("https://ncptools.media.yahoo.com:4443/v/carmot//"+post,'_blank');}else {alert("This bookmarklet is not meant for this domain.");}})();
+```
+***
+
 ### Edit in PNR
 For yahoo.com
 
